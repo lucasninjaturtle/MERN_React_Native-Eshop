@@ -20,6 +20,12 @@ const SingleProduct = (props)=>{
                 </View>
             </ScrollView>
 
+            <View style={{width:'100%', height:70, alignItems:'center'}}> 
+                
+                    <Button title='Add'/>
+            
+            </View>
+
         </Container>
     )
 }
