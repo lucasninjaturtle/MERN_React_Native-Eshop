@@ -1,25 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Header from './Shared/Header';
-import ProductContainer from "./Screens/Products/ProductContainer"
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { LogBox } from "react-native";
+import Header from "./Shared/Header";
+import ProductContainer from "./Screens/Products/ProductContainer";
+import { NavigationContainer } from "@react-navigation/native";
 
+//Navigators
+
+import Main from "./Navigators/Main";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Header/>
-      <ProductContainer/>
-    </View>
+    <NavigationContainer>
+     
+        <Header />
+        <Main/>
+    
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    alignItems:'center',
-    justifyContent: 'center',
-      
-  },
-});

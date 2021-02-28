@@ -13,7 +13,7 @@ import Banner from "../../Shared/Banner"
 const data = require ("../../assets/data/products.json")
 const categories = require('../../assets/data/categories.json')
 
-const ProductContainer = () =>{
+const ProductContainer = (props) =>{
 
     const [products, setProducts] = useState([])
     const [productsFiltered, setProductsFiltered] = useState([])
@@ -75,7 +75,7 @@ const ProductContainer = () =>{
             </Header>
             {focus == true ? (
                 <SearchedProduct
-                
+                navigation={props.navigation}
                 productsFiltered={productsFiltered}
                 
                 />
@@ -93,6 +93,7 @@ const ProductContainer = () =>{
             data={products}
             numColumns={2}
             renderItem={({item}) => <ProductList 
+            navigation={props.navigation}
             key={item.id}
             item={item}
 
