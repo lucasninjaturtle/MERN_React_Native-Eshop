@@ -47,12 +47,12 @@ const Cart = (props) => {
                 </Left>
                 <Body>
                   <Text>{data.name}</Text>
-                  <Text note numberOfLines={1}>
-                    Test
-                  </Text>
+                  
                 </Body>
                 <Right>
-                  
+                <Text note numberOfLines={1}>
+                    USD {data.price}
+                  </Text>
                 </Right>
               </ListItem>
             );
