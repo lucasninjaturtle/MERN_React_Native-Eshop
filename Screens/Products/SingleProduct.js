@@ -1,10 +1,24 @@
 import React, {useState, useEffect } from 'react'
 import {Image, View, StyleSheet, text, ScrollView, Button} from 'react-native'
 import {Left, Right, Container, H1} from 'native-base'
+//REDUX
+import {useSelector, useDispatch} from 'react-redux'
+import {addToCart} from '../../Redux/Actions/cartActions'
 
 const SingleProduct = (props)=>{
     const [item, setItem] = useState(props.route.params.item);
     const [availability, setAvailability] = useState('') 
+
+    //REDUX
+    const cartItems = useSelector(state => state.cartItems)
+   const dispatch = useDispatch();
+
+   // REDUX functions
+
+   const addItemToCart = item =>{
+       dispatch(addToCart(item));
+    
+   }
 
     return (
         <Container
@@ -22,7 +36,10 @@ const SingleProduct = (props)=>{
 
             <View style={{width:'100%', height:70, alignItems:'center'}}> 
                 
-                    <Button title='Add'/>
+                    <Button 
+                    title='Add'
+                    onPress={()=>addItemToCart(item)}
+                    />
             
             </View>
 
