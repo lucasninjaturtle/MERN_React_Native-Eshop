@@ -1,9 +1,12 @@
 import React from 'react'
-import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, TouchableOpacity, ScrollView, LogBox } from 'react-native'
 import { ListItem, Badge, Text} from 'native-base'
+
+// LogBox.ignoreAllLogs(disable);
 
 const CategoryFilter = (props) => {
 
+    console.log(props)
 return (
     <ScrollView
     bouces={true}
@@ -34,7 +37,7 @@ return (
                     <TouchableOpacity
                     key={item._id}
                     onPress={()=>{
-                        props.CategoryFilter(item._id), 
+                        props.CategoryFilter(item._id.$oid), 
                         props.setActive(props.categories.indexOf(item))
                     }}
         

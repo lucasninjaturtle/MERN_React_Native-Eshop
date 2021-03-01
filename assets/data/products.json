@@ -11,7 +11,7 @@
   "name": "FIFA 20",
   "description": "The most hard FIFA ever",
   "category": {
-    "$oid": "5f15d5cdcb4a6642bddc0fe9"
+    "$oid": "5f15d5cdcb4a6642bddc0f99"
   },
   "countInStock": 25,
   "__v": 0
@@ -28,7 +28,7 @@
   "name": "Garden Chair",
   "description": "beautiful chair for garden",
   "category": {
-    "$oid": "5f15d5b7cb4a6642bddc0fe8"
+    "$oid": "5f15d5b2cb4a6642bddc0fe7"
   },
   "countInStock": 10,
   "__v": 0
@@ -45,7 +45,7 @@
   "name": "Swimming Pool",
   "description": "beautiful Swimming Pool for garden",
   "category": {
-    "$oid": "5f15d5b7cb4a6642bddc0fe8"
+    "$oid": "5f15d5b2cb4a6642bddc0fe7"
   },
   "countInStock": 10,
   "__v": 0
@@ -79,7 +79,7 @@
   "name": "Sofa",
   "description": "Big Sofa for living room",
   "category": {
-    "$oid": "5f15d5b2cb4a6642bddc0fe7"
+    "$oid": "5f15d5b7cb4a6642bddc0fe8"
   },
   "countInStock": 2,
   "__v": 0

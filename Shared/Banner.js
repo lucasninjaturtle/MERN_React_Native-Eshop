@@ -1,7 +1,8 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 import {Image, StyleSheet, Dimensions, View, ScrollView} from 'react-native'
-import Swiper from 'react-native-swiper/src'
+import Swiper from 'react-native-swiper'
+
 
 var {width} = Dimensions.get("window");
 
@@ -25,9 +26,10 @@ const Banner = ()=>{
             <View style={styles.swiper}>
                 <Swiper
                 style={{height:width/2}}
-                showButtons={false}
+                index={0}
+                showButtons={true}
                 autoPlay={true}
-                autoPlayTimeout={2}               
+                autoplayTimeout={1}               
                 
                 >
                     {bannerData.map(item =>{
