@@ -7,6 +7,8 @@ import {
     Text,
     Button,
 } from 'react-native'
+
+//REDUX
 import {useSelector, useDispatch} from 'react-redux'
 import {addToCart} from '../../Redux/Actions/cartActions'
 
