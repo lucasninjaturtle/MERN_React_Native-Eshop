@@ -7,12 +7,26 @@ import {
     Text,
     Button,
 } from 'react-native'
+import {useSelector, useDispatch} from 'react-redux'
+import {addToCart} from '../../Redux/Actions/cartActions'
 
 var {width} = Dimensions.get("window");
 
 const ProductCard = (props) =>{
 
+    //Compopnent PROPS
     const {name, price, image, url, countInStock } = props;
+
+    //REDUX
+    const cartItems = useSelector(state => state.cartItems)
+   const dispatch = useDispatch();
+
+   // REDUX functions
+
+   const addItemToCart = props =>{
+       dispatch(addToCart(props));
+    
+   }
 
 
     return (
@@ -31,7 +45,11 @@ const ProductCard = (props) =>{
 
                 {countInStock > 0 ? (
                     <View>
-                        <Button title={'Add'} color={'green'}                    />
+                        <Button 
+                        title={'Add'} 
+                        color={'green'}
+                        onPress={()=>addItemToCart(props)}
+                        />
                     </View>
 
                 ) : <Text style={{marginTop: 20}}> Out Of Stock</Text>}

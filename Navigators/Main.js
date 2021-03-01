@@ -7,6 +7,8 @@ import { Ionicons } from '@expo/vector-icons'
 
 //Stacks
 import HomeNavigator from './HomeNavigator'
+import CartNavigator from './CartNavigator'
+
 
 
 // import CalendarNavigator from '../Calendar/CalendarNavigator'
@@ -49,7 +51,7 @@ const Main = () =>{
             />
             <Tab.Screen
             name='Cart'
-            component={HomeNavigator}
+            component={CartNavigator}
             options={{
                 tabBarIcon:({color}) =>(
                     <Ionicons

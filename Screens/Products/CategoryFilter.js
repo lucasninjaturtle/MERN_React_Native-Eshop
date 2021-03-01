@@ -6,7 +6,7 @@ import { ListItem, Badge, Text} from 'native-base'
 
 const CategoryFilter = (props) => {
 
-    console.log(props)
+   
 return (
     <ScrollView
     bouces={true}
