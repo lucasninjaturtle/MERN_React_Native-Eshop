@@ -9,6 +9,7 @@ import {
   ListItem,
   Thumbnail,
   Body,
+  Button,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -21,8 +22,20 @@ import { addToCart } from "../../Redux/Actions/cartActions";
 const { height, width } = Dimensions.get("window");
 
 const Cart = (props) => {
+  //total cart
+
+  let total = 0;
+  
+
+//REDUX CARtITEMS
   const cartItems = useSelector((state) => state.cartItems);
   const dispatch = useDispatch();
+
+  //TOTAL cartITEM
+
+  cartItems.forEach(cart=>{
+    return total+= cart.price
+  })
 
   // dispatch(nombreAction(value))
   // console.log(cartItems)
@@ -30,6 +43,7 @@ const Cart = (props) => {
     //   This <>  and </> to close is called react Fragment, this doesnt take a node on HTMLAllCollection, and its used on react to encapsulete and not taking HTML space
     <>
       {cartItems.length ? (
+        
         <Container>
           <H1 style={{ alignSelf: "center" }}>Cart</H1>
           {cartItems.map((data) => {
@@ -51,12 +65,32 @@ const Cart = (props) => {
                 </Body>
                 <Right>
                 <Text note numberOfLines={1}>
-                    USD {data.price}
+                    $ {data.price}
                   </Text>
                 </Right>
               </ListItem>
             );
           })}
+          <View style={styles.bottommContainer}>
+            <Left>
+              <Text style={styles.price}> ${total}</Text>
+            </Left>
+            <Right>
+            <Button
+            danger={true}
+            >
+            <Text>Clear Cart</Text>
+          </Button>
+            </Right>
+            <Right>
+              <Button title='Checkout' 
+              onPress={()=>props.navigation.navigate('Checkout')}>
+                <Text>CheckOut</Text>
+          </Button>
+            </Right>
+
+
+          </View>
         </Container>
       ) : (
         <Container style={styles.emptyContainer}>
@@ -65,14 +99,7 @@ const Cart = (props) => {
       )}
     </>
 
-    // <View style={{flex:1}}>
-
-    //     {cartItems.map(x=> {
-    //         return(
-    //             <Text>{x.name}</Text>
-    //         )
-    //     })}
-    // </View>
+    
   );
 };
 
@@ -82,6 +109,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  bottommContainer:{
+    flexDirection:'row',
+    position:'absolute',
+    bottom:0,
+    left:0,
+    backgroundColor:'white',
+    elevation: 20,
+},
+price:{
+    fontSize:18,
+    margin:20,
+    color:'red',
+}
 });
 
 export default Cart;

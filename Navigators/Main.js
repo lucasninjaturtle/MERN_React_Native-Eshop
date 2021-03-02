@@ -4,6 +4,7 @@ import {View} from 'react-native'
 // import Icon from 'react-native-vector-icons/FontAwesome'
 import {Icon} from 'native-base'
 import { Ionicons } from '@expo/vector-icons'
+import CartIcon from '../Shared/CartIcon'
 
 //Stacks
 import HomeNavigator from './HomeNavigator'
@@ -54,11 +55,14 @@ const Main = () =>{
             component={CartNavigator}
             options={{
                 tabBarIcon:({color}) =>(
+                    <View>
                     <Ionicons
                     name='cart'
                     color={color}
                     size={40}
                     />
+                    <CartIcon/>
+                    </View>
                 )
             }}
             />
