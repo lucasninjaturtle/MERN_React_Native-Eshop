@@ -15,7 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 //REDUX
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart } from "../../Redux/Actions/cartActions";
+import { clearCart } from "../../Redux/Actions/cartActions";
 
 //DIMNESIONS
 
@@ -28,8 +28,16 @@ const Cart = (props) => {
   
 
 //REDUX CARtITEMS
-  const cartItems = useSelector((state) => state.cartItems);
+  //REDUX
+  const cartItems = useSelector(state => state.cartItems)
   const dispatch = useDispatch();
+
+  // REDUX functions
+
+  const cleanCart = () =>{
+      dispatch(clearCart());
+   
+  }
 
   //TOTAL cartITEM
 
@@ -78,6 +86,7 @@ const Cart = (props) => {
             <Right>
             <Button
             danger={true}
+            onPress={()=>cleanCart()}
             >
             <Text>Clear Cart</Text>
           </Button>
