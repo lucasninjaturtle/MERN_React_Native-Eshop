@@ -12,6 +12,10 @@ import store from "./Redux/Store";
 
 import Main from "./Navigators/Main";
 
+// Disable LogBox (Warnings)
+
+LogBox.ignoreAllLogs(true);
+
 export default function App() {
   return (
     <Provider store={store}>

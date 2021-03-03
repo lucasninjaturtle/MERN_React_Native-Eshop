@@ -16,6 +16,7 @@ var {width} = Dimensions.get("window");
 
 const ProductCard = (props) =>{
 
+    
     //Compopnent PROPS
     const {name, price, image, url, countInStock } = props;
 

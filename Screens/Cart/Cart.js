@@ -10,12 +10,15 @@ import {
   Thumbnail,
   Body,
   Button,
+  SwipeRow,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
+import CartUnit from './CartUnit.js'
 
 //REDUX
 import { useSelector, useDispatch } from "react-redux";
-import { clearCart } from "../../Redux/Actions/cartActions";
+import { clearCart, removeFromCart } from "../../Redux/Actions/cartActions";
+import { SwipeListView } from 'react-native-swipe-list-view';
 
 //DIMNESIONS
 
@@ -31,6 +34,9 @@ const Cart = (props) => {
   //REDUX
   const cartItems = useSelector(state => state.cartItems)
   const dispatch = useDispatch();
+  
+  // dispatch(nombreAction(value))
+  // console.log(cartItems)
 
   // REDUX functions
 
@@ -39,14 +45,18 @@ const Cart = (props) => {
    
   }
 
+  const remFromCart = (props) =>{
+    dispatch(removeFromCart(props));
+ 
+}
+
   //TOTAL cartITEM
 
   cartItems.forEach(cart=>{
     return total+= cart.price
   })
 
-  // dispatch(nombreAction(value))
-  // console.log(cartItems)
+  
   return (
     //   This <>  and </> to close is called react Fragment, this doesnt take a node on HTMLAllCollection, and its used on react to encapsulete and not taking HTML space
     <>
@@ -54,31 +64,34 @@ const Cart = (props) => {
         
         <Container>
           <H1 style={{ alignSelf: "center" }}>Cart</H1>
-          {cartItems.map((data) => {
-            return (
-              <ListItem 
-              thumbnail
-              style={styles.ListItem}
-              key={Math.random(1000000)}
-              >
-                <Left>
-                  <Thumbnail 
-                  square 
-                  source={{uri: data.image ? data.image : 'https://images-ext-2.discordapp.net/external/Te2rXvX-VcMp4isU-ffJ-ykCJVIBZ8G0DQGyAN_Fp_U/https/cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png?width=645&height=458'}}
+          
+          <SwipeListView
+            data={cartItems}
+            renderItem={(data)=>(
+            <CartUnit item={data}/> 
+            )}
+            renderHiddenItem={(data)=>(
+              <View style={styles.hiddenContainer}>
+                <TouchableOpacity style={styles.hiddenButton}> 
+                  <Ionicons 
+                  name='trash-outline'
+                  color={'red'}
+                  size={30}
+                  onPress={()=>remFromCart(data.item)}
                   />
-                </Left>
-                <Body>
-                  <Text>{data.name}</Text>
-                  
-                </Body>
-                <Right>
-                <Text note numberOfLines={1}>
-                    $ {data.price}
-                  </Text>
-                </Right>
-              </ListItem>
-            );
-          })}
+                </TouchableOpacity>
+              </View>
+            )}
+            disableRightSwipe={true}
+            previewOpenDelay={3000}
+            friction={1000}
+            tension={40}
+            leftOpenValue={75}
+            stopLeftSwipe={75}
+            rightOpenValue={-75}
+          />
+          
+        
           <View style={styles.bottommContainer}>
             <Left>
               <Text style={styles.price}> ${total}</Text>
@@ -130,6 +143,19 @@ price:{
     fontSize:18,
     margin:20,
     color:'red',
+},
+hiddenContainer: {
+  flex: 1,
+  justifyContent: 'flex-end',
+  flexDirection: 'row'
+},
+hiddenButton: {
+  backgroundColor: 'white',
+  justifyContent: 'center',
+  alignItems: 'flex-end',
+  paddingRight: 25,
+  height: 70,
+  width: width / 1.2
 }
 });
 
