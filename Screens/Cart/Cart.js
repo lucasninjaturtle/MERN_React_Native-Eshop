@@ -45,7 +45,7 @@ const Cart = (props) => {
    
   }
 
-  const remFromCart = (props) =>{
+  const remFromCart = props =>{
     dispatch(removeFromCart(props));
  
 }
