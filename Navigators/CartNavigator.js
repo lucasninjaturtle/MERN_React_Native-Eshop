@@ -1,7 +1,12 @@
 import React from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
-import CheckOut from '../Screens/Cart/Checkout/CheckOut'
+
 import Cart from '../Screens/Cart/Cart'
+
+//Checkooutnavigator to go to Payment, Confirm and shipping.
+import Checkooutnavigator from './CheckoutNavigator'
+import CheckoutNavigator from './CheckoutNavigator'
+
 
 const Stack = createStackNavigator()
 
@@ -18,8 +23,8 @@ const MyStack = ()=>{
             }}
             />
             <Stack.Screen
-            name='CheckOut'
-            component={CheckOut}
+            name='Checkout'
+            component={CheckoutNavigator}
             options={{
                 title: 'Checkout',
             }}
