@@ -3,6 +3,12 @@ const app = express ();
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const mongoose = require ('mongoose')
+const cors = require('cors')
+
+//ENABLE CORS BEFORE ANYTHING
+app.use(cors())
+//ALLOWING ALL HTTP REQUEST  with *
+app.options('*', cors())
 
 //Models
 const Product = require('./models/product') 
