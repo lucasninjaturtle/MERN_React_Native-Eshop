@@ -6,13 +6,15 @@ const mongoose = require ('mongoose')
 
 //Models
 const Product = require('./models/product') 
+const Category = require('./models/category') 
+const Order = require('./models/order') 
+const User = require('./models/user')
 
 // CONSTANTS
 require('dotenv/config');
 
 const api = process.env.API
 const backUrl = process.env.BACKEND_URL
-const productsRouter = require('./routers/product')
 
 
 
@@ -20,8 +22,22 @@ const productsRouter = require('./routers/product')
 app.use(bodyParser.json());
 app.use(morgan('tiny'))
 
-app.use(`${api}/products`, productsRouter)
 
+//Routes
+const categoriesRoutes = require('./routes/categories')
+const productsRoutes = require('./routes/product')
+const usersRoutes = require ('./routes/users')
+const ordersRoutes = require ('./routes/orders')
+
+
+
+app.use(`${api}/categories`, categoriesRoutes)
+app.use(`${api}/products`, productsRoutes)
+app.use(`${api}/users`, usersRoutes)
+app.use(`${api}/orders`, ordersRoutes)
+
+
+//DATABASE
 
 
 //          PORT, URL   / API  /  API END
@@ -43,7 +59,8 @@ mongoose.connect(process.env.CONNECTION_STRING, {
 })
 
 
-//APP LISTEN
+//APP LISTEN SERVER
+
 app.listen (3005, ()=>{
     
     console.log (`listening on ${backUrl}`)
