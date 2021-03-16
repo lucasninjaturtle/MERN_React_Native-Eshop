@@ -32,7 +32,12 @@ const CheckOut = (props) =>{
 const cartItems = useSelector(state => state.cartItems)
 
 
-        
+        useEffect(()=>{
+setOrderItems(cartItems)
+            return ()=>{
+                setOrderItems()
+            }
+        }, [])
 
     //function to navigate  through component
 

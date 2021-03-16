@@ -83,7 +83,7 @@ const Payment = (props) =>{
                 <View style={{marginTop:60, alignSelf:'center'}}>
                         <Button
                         title={'Confirm'}
-                        onPress={()=> props.navigation.navigate('Confirm', {order})}
+                        onPress={()=> props.navigation.navigate('Confirm', {order:order})}
                         />
 
                 </View>
