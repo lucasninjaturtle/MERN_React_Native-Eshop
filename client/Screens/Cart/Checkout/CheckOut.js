@@ -105,7 +105,7 @@ const cartItems = useSelector(state => state.cartItems)
                             return <Picker.Item
                             key={c.code}
                             label={c.name}
-                            valule={c.name}
+                            value={c.name}
                             />
                         })}
                     </Picker>
