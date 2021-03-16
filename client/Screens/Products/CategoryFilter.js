@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, TouchableOpacity, ScrollView, LogBox } from 'react-native'
 import { ListItem, Badge, Text} from 'native-base'
 
-// LogBox.ignoreAllLogs(disable);
+
 
 const CategoryFilter = (props) => {
 
