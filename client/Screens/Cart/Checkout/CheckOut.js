@@ -57,7 +57,7 @@ const cartItems = useSelector(state => state.cartItems)
         extraHeight={200}
         enableOnAndroid={true}
         >
-            <Text style={styles.title}>{props.title} Shipping Address </Text>
+            <Text style={styles.title}>{props.title} Shipping Details </Text>
                 <Input
                 placeholder={'Phone'}
                 name={'Phone'}
