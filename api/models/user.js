@@ -44,4 +44,14 @@ const userSchema = mongoose.Schema({
 
 })
 
+
+//Create a VIRTUAL id in stead of _id
+userSchema.virtual('id').get(function(){
+    return this._id.toHexString();
+})
+
+userSchema.set('toJSON',{
+virtuals:true,
+});
+
 exports.User = mongoose.model('User', userSchema)
