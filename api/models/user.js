@@ -22,8 +22,8 @@ const userSchema = mongoose.Schema({
         required:false,
     },
     street:{
-    type:String,
-    default:''
+        type:String,
+        default:''
     },
     apartment:{
         type:String,

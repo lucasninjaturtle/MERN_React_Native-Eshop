@@ -7,7 +7,8 @@ function authJwt (){
     const api = process.env.API
     return expressJwt({
         secret,
-        algorithms:['HS256'] 
+        algorithms:['HS256'],
+        isRevoked: isRevoked
     }).unless({
         path:[
             //test on www.regex101.com with /\/api\/v1\/products(.*)/  and example: /api/v1/products/get/features/4
@@ -17,6 +18,16 @@ function authJwt (){
             `${api}/users/register`,
         ]
     })
+}
+
+
+//REJECT the token is not admin
+async function isRevoked (req, payload, done){
+    if(!payload.isAdmin){
+        return done(null, true)
+    }
+    done();
+
 }
 
 module.exports = authJwt;
