@@ -2,8 +2,15 @@ const express = require('express')
 const app = express ();
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+// CONSTANTS
+require('dotenv/config');
+const api = process.env.API
+const backUrl = process.env.BACKEND_URL
+const errorHandler = require('./helpers/error-handler')
+
 const mongoose = require ('mongoose')
 const cors = require('cors')
+const authJwt = require('./helpers/jwt');
 
 //ENABLE CORS BEFORE ANYTHING
 app.use(cors())
@@ -17,23 +24,24 @@ const Order = require('./models/order')
 const User = require('./models/user')
 
 // CONSTANTS
-require('dotenv/config');
 
-const api = process.env.API
-const backUrl = process.env.BACKEND_URL
+
 
 
 
 // Midleware
 app.use(bodyParser.json());
 app.use(morgan('tiny'))
+app.use(authJwt())
+app.use(errorHandler)
 
 
 //Routes
 const categoriesRoutes = require('./routes/categories')
 const productsRoutes = require('./routes/product')
 const usersRoutes = require ('./routes/users')
-const ordersRoutes = require ('./routes/orders')
+const ordersRoutes = require ('./routes/orders');
+
 
 
 
