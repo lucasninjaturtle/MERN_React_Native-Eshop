@@ -57,6 +57,20 @@ router.get('/:id', async (req,res)=>{
 })
 
 
+//GET USER COUNT
+
+router.get(`/get/count`,async (req,res) =>{
+    
+
+    let usersCount = await User.countDocuments((count)=> count)
+    !usersCount ? 
+    res.status(500).json({sucess:false}) :
+    res.send({usersCount})
+})
+
+
+
+
 // POST METHODS
 
 //CREATE USERS
