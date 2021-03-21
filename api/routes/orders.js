@@ -135,6 +135,21 @@ router.delete('/:id', (req,res)=>{
 })
 
 
+//GET ORDERS BY USER
+
+
+router.get('/get/userorders/:userid', async (req, res) =>{
+    // -1 NEWEST TO OLDEST (sort method)
+    const UserOrderList = await Order.find({user: req.params.userid})
+    .populate({path:'orderItems', populate: {
+        path:'product', populate:'category'}
+    })
+    .sort({"dateOrdered":-1});
+
+    !UserOrderList ? res.status(500).json({success:false}) :
+    res.send(UserOrderList);
+})
+
 
 
 module.exports = router;
