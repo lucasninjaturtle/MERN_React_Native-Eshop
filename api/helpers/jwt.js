@@ -12,6 +12,7 @@ function authJwt (){
     }).unless({
         path:[
             //test on www.regex101.com with /\/api\/v1\/products(.*)/  and example: /api/v1/products/get/features/4
+            {url: /\/public\/uploads(.*)/, methods:['GET', 'OPTIONS']},
             {url: /\/api\/v1\/products(.*)/, methods:['GET', 'OPTIONS']},
             {url: /\/api\/v1\/categories(.*)/, methods:['GET', 'OPTIONS']},
             // `${api}/users`,
