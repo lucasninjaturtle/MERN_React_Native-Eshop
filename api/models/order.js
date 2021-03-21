@@ -1,10 +1,6 @@
 const mongoose = require ('mongoose')
 
 const orderSchema = mongoose.Schema({
-    id: {
-        type:String,
-        required:true,
-    },
     orderItems: [{
         type:mongoose.Schema.Types.ObjectId,
         ref:'OrderItem',
