@@ -25,6 +25,30 @@ router.get('/', async (req, res) =>{
     res.send(order);
 })
 
+
+//GET TOTAL SALES $$$
+
+router.get('/get/totalsales', async (req, res)=>{
+    const totalSales = await Order.aggregate([
+        { $group: { _id:null, totalsales: {$sum : '$totalPrice'}}}
+    ])
+    !totalSales ? 
+    res.status(500).json({sucess:false}) :
+    res.send({totalsales: totalSales.pop().totalsales})
+})
+
+
+//ANALYTICS GET
+
+router.get(`/get/count`,async (req,res) =>{
+    
+
+    let orderCount = await Order.countDocuments((count)=> count)
+    !orderCount ? 
+    res.status(500).json({sucess:false}) :
+    res.send({orderCount})
+})
+
 // POST METHODS
 router.post('/', async (req,res)=>{
     // Loop for every order Item and save everyone on de DB
@@ -40,7 +64,15 @@ router.post('/', async (req,res)=>{
     }))
     const orderItemsIdsPromiseResolved = await orderitemsId
 
-    console.log(orderItemsIdsPromiseResolved)
+    const totalPrices = await Promise.all(orderItemsIdsPromiseResolved.map(async (orderItemId)=>{
+        const orderItem = await OrderItem.findById(orderItemId).populate("product", "price")
+        const totalPrice = orderItem.product.price * orderItem.quantity
+        return totalPrice;
+    }))
+
+    console.log(totalPrices)
+
+    const totalPrice = totalPrices.reduce((a,b) => a+b, 0)
 
     let order = new Order({
         orderItems:orderItemsIdsPromiseResolved ,
@@ -51,7 +83,7 @@ router.post('/', async (req,res)=>{
         country:req.body.country,
         phone:req.body.phone,
         status:req.body.status,
-        totalPrice:req.body.totalPrice,
+        totalPrice:totalPrice,
         user:req.body.user,
     })
     order = await order.save();
@@ -88,8 +120,11 @@ router.put('/:id', async (req,res)=>{
 //api/v1/:id"
 router.delete('/:id', (req,res)=>{
     Order.findByIdAndRemove(req.params.id)
-    .then(order=>{
+    .then(async order=>{
         if(order){
+            await order.orderItems.map(async orderItem =>{
+                await OrderItem.findByIdAndRemove(orderItem)
+            })
             return res.status(200).json({success:true, message:'the order was deleted'})
         }else{
             return res.status(404).json({success:false, message:'order not found'})
@@ -98,5 +133,8 @@ router.delete('/:id', (req,res)=>{
         return res.status(400).json({success:false, error: err})
     })
 })
+
+
+
 
 module.exports = router;
