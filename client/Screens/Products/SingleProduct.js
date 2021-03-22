@@ -20,11 +20,13 @@ const SingleProduct = (props)=>{
     
    }
 
-   
+   // Category Color
+
+   let catCol = props.route.params.item.category.color
 
     return (
         <Container
-        style={styles.containter}
+            style={styles.containter, {backgroundColor:catCol}}
         >
             <ScrollView style={{marginBottom:80, padding:5}}>
                 <View>
@@ -40,7 +42,7 @@ const SingleProduct = (props)=>{
                 
                     <Button 
                     title='Add'
-                    onPress={()=>addItemToCart(item), ()=>console.log(props)}
+                    onPress={()=>addItemToCart(item), ()=>console.log(props.route.params.item.category.color)}
                     />
             
             </View>
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
         position:'relative',
         height:'100%',
         //this color you need to change in order make color by category
-        backgroundColor:"red"
+        
     },
     imageContainer:{
         backgroundColor:'red',

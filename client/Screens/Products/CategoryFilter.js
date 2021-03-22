@@ -6,7 +6,8 @@ import { ListItem, Badge, Text} from 'native-base'
 
 const CategoryFilter = (props) => {
 
-  
+    console.log(props)
+    
 return (
     <ScrollView
     bouces={true}
@@ -44,7 +45,7 @@ return (
                     >
                         <Badge
                         style={[styles.center, {margin: 5, color:"black"},
-                            props.active == props.categories.indexOf(item) ? styles.active : styles.inactive
+                            props.active == props.categories.indexOf(item) ? styles.active : {backgroundColor:item.color, fontWeight:'bold',}
                         ]}
                         >
                             <Text styles={{color:'black'}}>{item.name}</Text>
@@ -59,6 +60,7 @@ return (
 
 }
 
+
 const categoryColor = 'red'
 
 
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
         
     },
     active:{
-        backgroundColor: categoryColor,
+        backgroundColor: 'grey',
         color:'black'
 
     },
