@@ -53,6 +53,7 @@ var storage = multer.diskStorage({
 let filter = {}
 router.get(`/`,async (req,res) =>{
     if(req.query.categories){
+        console.log(req.query.categories)
         filter = {category: req.query.categories.split(',')}
     }
     const productList = await Product.find(filter).populate('category');
