@@ -20,6 +20,8 @@ const SingleProduct = (props)=>{
     
    }
 
+   
+
     return (
         <Container
         style={styles.containter}
@@ -38,7 +40,7 @@ const SingleProduct = (props)=>{
                 
                     <Button 
                     title='Add'
-                    onPress={()=>addItemToCart(item)}
+                    onPress={()=>addItemToCart(item), ()=>console.log(props)}
                     />
             
             </View>
@@ -50,10 +52,12 @@ const SingleProduct = (props)=>{
 const styles = StyleSheet.create({
     containter:{
         position:'relative',
-        height:'100%'
+        height:'100%',
+        //this color you need to change in order make color by category
+        backgroundColor:"red"
     },
     imageContainer:{
-        backgroundColor:'white',
+        backgroundColor:'red',
         padding:0,
         margin:0
     },

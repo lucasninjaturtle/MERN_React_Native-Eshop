@@ -6,11 +6,12 @@ import SearchedProduct from "./SearchedProducts";
 import Banner from "../../Shared/Banner";
 import CategoryFilter from "./CategoryFilter";
 import { ScrollView } from "react-native-gesture-handler";
+import axios from 'axios'
+import baseURL from '../../assets/common/baseUrl'
 
 
 const {height} = Dimensions.get('window')
-const data = require("../../assets/data/products.json");
-const productsCategories = require("../../assets/data/categories.json");
+
 
 const ProductContainer = (props) => {
   const [products, setProducts] = useState([]);
@@ -22,13 +23,34 @@ const ProductContainer = (props) => {
   const [initialState, setInitialState] = useState([]);
 
   useEffect(() => {
-    setProducts(data);
-    setProductsFiltered(data);
+    
     setFocus(false);
-    setCategories(productsCategories);
-    setProductsCtg(data)
+    
     setActive(-1);
-    setInitialState(data);
+    
+    
+    axios
+        // .get(`${baseURL}products`)
+        //192.168.0.13:3005
+        .get('http://192.168.0.13:3005/api/v1/products')
+        .then(res=>{
+          
+          setProducts(res.data);
+          setProductsFiltered(res.data);
+          setProductsCtg(res.data)
+          setInitialState(res.data);
+        })
+
+        axios
+        // .get(`${baseURL}products`)
+        //192.168.0.13:3005
+        .get('http://192.168.0.13:3005/api/v1/categories')
+        .then(res=>{
+          setCategories(res.data);
+        })
+
+
+    
 
     return () => {
       setProducts([]);
@@ -62,8 +84,11 @@ const ProductContainer = (props) => {
       ctg === "all"
         ? [setProductsCtg(initialState), setActive(true)]
         : [
+          
             setProductsCtg(
-              products.filter((i) => i.category.$oid === ctg),
+              // a = products.filter((i) => console.log(`1 ${i.category}`) ),
+              // if a product has null category it will crash - BEWARE testing
+              products.filter((i) => i.category._id === ctg ),
               setActive(true)
             ),
           ];
@@ -116,7 +141,7 @@ const ProductContainer = (props) => {
                         return(
                             <ProductList
                             navigation={props.navigation}
-                            key={item._id.$oid}
+                            key={item.id}
                             item={item}
                             />
                         )
@@ -145,7 +170,7 @@ const styles = StyleSheet.create({
 
     },
     listContainter:{
-        height:height,
+        // height:height,
         flex:1,
         flexDirection:'row',
         alignItems:'flex-start',

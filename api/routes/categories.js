@@ -9,6 +9,7 @@ router.get(`/`,async (req,res) =>{
     if(!categoriesList){
     res.status(500).json({sucess:false})
 }else{
+    console.log(categoriesList)
     res.status(200).send(categoriesList)
 }
 })

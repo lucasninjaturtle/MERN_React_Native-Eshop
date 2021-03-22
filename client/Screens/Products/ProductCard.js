@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         alignItems: 'center',
         elevation: 8,
-        backgroundColor: 'white'
+        //Change this BG colour to change color of card
+        backgroundColor: 'red'
     },
     image: {
         width: width / 2 - 20 - 10,
