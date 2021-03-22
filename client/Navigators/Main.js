@@ -9,6 +9,7 @@ import CartIcon from '../Shared/CartIcon'
 //Stacks
 import HomeNavigator from './HomeNavigator'
 import CartNavigator from './CartNavigator'
+import UserNavigator from './UserNavigator'
 
 
 
@@ -83,7 +84,7 @@ const Main = () =>{
 
 <Tab.Screen
             name='User'
-            component={HomeNavigator}
+            component={UserNavigator}
             options={{
                 tabBarIcon:({color}) =>(
                     <Ionicons
