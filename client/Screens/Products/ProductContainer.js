@@ -22,6 +22,7 @@ const ProductContainer = (props) => {
   const [productsCtg, setProductsCtg] = useState([]);
   const [active, setActive] = useState();
   const [initialState, setInitialState] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   useFocusEffect((
     useCallback(
@@ -41,6 +42,7 @@ const ProductContainer = (props) => {
           setProductsFiltered(res.data);
           setProductsCtg(res.data)
           setInitialState(res.data);
+          setLoading(false)
         })
 
         axios
@@ -102,7 +104,10 @@ const ProductContainer = (props) => {
   };
 
   return (
-    <Container style={styles.container}>
+    <>
+    {loading === false ? (
+
+<Container style={styles.container}>
       <Header searchBar rounded>
         <Item>
           <Icon name="ios-search" />
@@ -166,6 +171,15 @@ const ProductContainer = (props) => {
         </ScrollView>
       )}
     </Container>
+
+    ) :
+
+    <Container style={[styles.center, {backgroundColor:'white'}]}>
+      <ActivityIndicator size="large" color="blue"/>
+    </Container>
+    
+  }
+    </>
   );
 };
 

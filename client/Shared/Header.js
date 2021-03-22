@@ -7,11 +7,11 @@ const Header = () =>{
 
     return(
 
-        <View style={styles.header}>
+        <View style={[styles.header, {backgroundColor:'transparent'}]}>
             <Image
                 source={require('../assets/favicon.png')}
                 resizeMode='contain'
-                style={{height:50}}
+                style={{height:20, backgroundColor:'transparent'}}
             />
         </View>
 
