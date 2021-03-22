@@ -42,7 +42,7 @@ const SingleProduct = (props)=>{
                 
                     <Button 
                     title='Add'
-                    onPress={()=>addItemToCart(item), ()=>console.log(props.route.params.item.category.color)}
+                    onPress={()=>addItemToCart(item)}
                     />
             
             </View>

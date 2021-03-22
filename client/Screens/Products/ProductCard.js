@@ -31,9 +31,9 @@ const ProductCard = (props) =>{
     
    }
 
-
+   
     return (
-            <View style={styles.container}>
+            <View style={[styles.container, {backgroundColor:props.category.color}]}>
                 <Image 
                 style={styles.image}
                 resizeMod='contain'
@@ -97,8 +97,10 @@ const styles = StyleSheet.create({
     },
     price: {
         fontSize: 20,
-        color: 'orange',
-        marginTop: 10
+        color: 'black',
+        marginTop: 10,
+        marginBottom:10,
+        fontWeight: "bold",
     }
 })
 

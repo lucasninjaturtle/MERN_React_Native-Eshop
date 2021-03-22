@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { View, StyleSheet, ActivityIndicator, FlatList, Dimensions } from "react-native";
 import { Container, Header, Icon, Item, Input, Text } from "native-base";
 import ProductList from "./ProductList";
@@ -8,6 +8,7 @@ import CategoryFilter from "./CategoryFilter";
 import { ScrollView } from "react-native-gesture-handler";
 import axios from 'axios'
 import baseURL from '../../assets/common/baseUrl'
+import {useFocusEffect} from '@react-navigation/native'
 
 
 const {height} = Dimensions.get('window')
@@ -22,9 +23,10 @@ const ProductContainer = (props) => {
   const [active, setActive] = useState();
   const [initialState, setInitialState] = useState([]);
 
-  useEffect(() => {
-    
-    setFocus(false);
+  useFocusEffect((
+    useCallback(
+      () =>{
+        setFocus(false);
     
     setActive(-1);
     
@@ -60,8 +62,12 @@ const ProductContainer = (props) => {
       setActive();
       setInitialState();
     };
-  }, []);
-
+      },
+      [],
+    )
+  ))
+    
+  
   // Product Methods
 
   const searchProduct = (text) => {
