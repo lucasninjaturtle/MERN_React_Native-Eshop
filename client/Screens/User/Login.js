@@ -21,7 +21,7 @@ const Login = (props) =>{
             setError("Please fill in you credentials")
         }else{
             setError('')
-            console.log('succes')
+            console.log('success')
         }
     }
 

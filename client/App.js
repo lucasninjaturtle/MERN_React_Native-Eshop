@@ -5,6 +5,9 @@ import Header from "./Shared/Header";
 import ProductContainer from "./Screens/Products/ProductContainer";
 import { NavigationContainer } from "@react-navigation/native";
 
+//make Toast available on all the app
+import Toast from 'react-native-toast-message'
+
 //Redux
 import { Provider } from "react-redux";
 import store from "./Redux/Store";
@@ -22,6 +25,7 @@ export default function App() {
       <NavigationContainer>
         <Header />
         <Main />
+        <Toast ref={(ref)=> Toast.setRef(ref)}/>
       </NavigationContainer>
     </Provider>
   );

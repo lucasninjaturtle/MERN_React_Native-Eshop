@@ -4,6 +4,7 @@ import {Left, Right, Container, H1} from 'native-base'
 //REDUX
 import {useSelector, useDispatch} from 'react-redux'
 import {addToCart} from '../../Redux/Actions/cartActions'
+import Toast from "react-native-toast-message";
 
 const SingleProduct = (props)=>{
     const [item, setItem] = useState(props.route.params.item);
@@ -42,7 +43,14 @@ const SingleProduct = (props)=>{
                 
                     <Button 
                     title='Add'
-                    onPress={()=>addItemToCart(item)}
+                    onPress={()=>{addItemToCart(item),
+                        Toast.show({
+                            topOffset:60,
+                            type:'success',
+                            text1: `${item.name} added to cart`,
+                            text2: 'Go to your cart to complete the order'
+                        })
+                    }}
                     />
             
             </View>
