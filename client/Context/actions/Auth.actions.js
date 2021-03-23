@@ -23,7 +23,7 @@ export const loginUser = (user, dispatch) =>{
         body:JSON.stringify(user),
         headers:{
             Accept:'application/json',
-            "Content-type": "application/json"
+            "Content-Type": "application/json"
         }
     })
     .then((res)=> res.json())
@@ -57,11 +57,10 @@ export const getUserProfile = (id) =>{
         body:JSON.stringify(user),
         headers:{
             Accept:'application/json',
-            "Content-type": "application/json"
+            "Content-Type": "application/json"
         },
     })
     .then(res=>res.json())
-    .then(data=>console.log(data))
 }
 
 export const logoutuser = (dispatch) =>{
@@ -71,7 +70,7 @@ export const logoutuser = (dispatch) =>{
 
 export const setCurrentUser = (decoded, user) =>{
     return{
-        tye:SET_CURRENT_USER,
+        type:SET_CURRENT_USER,
         payload: decoded,
         userProfile:user
     }

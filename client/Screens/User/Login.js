@@ -1,16 +1,32 @@
-import React,{useState} from 'react'
+import React,{useState, useContext, useEffect} from 'react'
 import {View, Text, StyleSheet, Button, Dimensions} from 'react-native'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 import Input from '../../Shared/Form/Input'
 import Error from '../../Shared/Error'
 
+// CONTEXT API
+
+import AuthGlobal from '../../Context/store/AuthGlobal'
+import {loginUser} from '../../Context/actions/Auth.actions'
+//
+
+
 var {width} = Dimensions.get("window");
 
 const Login = (props) =>{
-
+    const context = useContext(AuthGlobal)
     const [email, setEmail] = useState('')
     const [password, setPasssword] = useState('')
     const [error, setError] = useState('')
+
+    // WHEN DATA LOADS
+
+    useEffect(()=>{
+        
+        if(context.stateUser.isAuthenticated === true){
+            props.navigation.navigate('User profile')
+        }
+    },[context.stateUser.isAuthenticated])
 
     const handleSubmit = ()=>{
         const user = {
@@ -21,7 +37,8 @@ const Login = (props) =>{
             setError("Please fill in you credentials")
         }else{
             setError('')
-            console.log('success')
+            loginUser(user, context.dispatch)
+            console.log(context)
         }
     }
 
