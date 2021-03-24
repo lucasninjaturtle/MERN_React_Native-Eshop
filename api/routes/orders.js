@@ -70,7 +70,7 @@ router.post('/', async (req,res)=>{
         return totalPrice;
     }))
 
-    console.log(totalPrices)
+  
 
     const totalPrice = totalPrices.reduce((a,b) => a+b, 0)
 

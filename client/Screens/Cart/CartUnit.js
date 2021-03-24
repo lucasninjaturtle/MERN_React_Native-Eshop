@@ -13,7 +13,7 @@ import {
 
 const CartUnit = (props) =>{
     const data = props.item.item
-    console.log(data)
+    // console.log(data)
 
 
 

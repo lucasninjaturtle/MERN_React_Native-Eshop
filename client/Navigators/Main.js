@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {View} from 'react-native'
 // import Icon from 'react-native-vector-icons/FontAwesome'
-import {Icon} from 'native-base'
+import {Container, Icon} from 'native-base'
 import { Ionicons } from '@expo/vector-icons'
 import CartIcon from '../Shared/CartIcon'
 
@@ -10,6 +10,8 @@ import CartIcon from '../Shared/CartIcon'
 import HomeNavigator from './HomeNavigator'
 import CartNavigator from './CartNavigator'
 import UserNavigator from './UserNavigator'
+import AdminNavigator from './AdminNavigator'
+import AuthGlobal from '../Context/store/AuthGlobal'
 
 
 
@@ -20,6 +22,8 @@ import UserNavigator from './UserNavigator'
 const Tab = createBottomTabNavigator();
 
 const Main = () =>{
+
+    const context = useContext(AuthGlobal)
 
     
     return(
@@ -67,10 +71,11 @@ const Main = () =>{
                 )
             }}
             />
+{context.stateUser.user.isAdmin == true ? (
 
 <Tab.Screen
             name='Admin'
-            component={HomeNavigator}
+            component={AdminNavigator}
             options={{
                 tabBarIcon:({color}) =>(
                     <Ionicons
@@ -81,6 +86,9 @@ const Main = () =>{
                 )
             }}
             />
+
+) : null}
+
 
 <Tab.Screen
             name='User'

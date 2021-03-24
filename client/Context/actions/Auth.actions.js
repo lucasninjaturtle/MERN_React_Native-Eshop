@@ -5,15 +5,6 @@ import jwt_decode from 'jwt-decode'
 import AsyncStorage from '@react-native-community/async-storage'
 import Toast from "react-native-toast-message";
 
-
-
-// axios
-//         // .get(`${baseURL}products`)
-//         //192.168.0.13:3005
-//         .get('http://192.168.0.13:3005/api/v1/products')
-//         .then(res=>{
-
-
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
 
@@ -32,9 +23,10 @@ export const loginUser = (user, dispatch) =>{
             const token = data.token;
             AsyncStorage.setItem('jwt', token)
             const decoded = jwt_decode(token)
-            dispatch(setCurrentUser(decoded, user))
+            dispatch(setCurrentUser(decoded, data.user))
         }else{
-            logoutuser(dispatch)
+            console.log('logOUT USER')
+            logoutUser(dispatch)
         }
     })
     .catch(err=>{
@@ -44,7 +36,7 @@ export const loginUser = (user, dispatch) =>{
             text1: 'Please provide correct credentials',
             text2:''
         })
-        logoutuser(dispatch)
+        logoutUser(dispatch)
     })
 
 
@@ -63,12 +55,13 @@ export const getUserProfile = (id) =>{
     .then(res=>res.json())
 }
 
-export const logoutuser = (dispatch) =>{
+export const logoutUser = (dispatch) =>{
     AsyncStorage.removeItem('jwt');
     dispatch(setCurrentUser({}))
 }
 
 export const setCurrentUser = (decoded, user) =>{
+    
     return{
         type:SET_CURRENT_USER,
         payload: decoded,

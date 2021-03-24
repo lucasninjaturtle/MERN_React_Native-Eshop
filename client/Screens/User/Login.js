@@ -18,37 +18,40 @@ const Login = (props) =>{
     const [email, setEmail] = useState('')
     const [password, setPasssword] = useState('')
     const [error, setError] = useState('')
+    const [isAuth, setIsAuth] = useState(false)
 
     // WHEN DATA LOADS
 
     useEffect(()=>{
         
-        if(context.stateUser.isAuthenticated === true){
+        if(context.stateUser.isAuthenticated === true ){
             props.navigation.navigate('User profile')
         }
     },[context.stateUser.isAuthenticated])
 
     const handleSubmit = ()=>{
         const user = {
-            email,
-            password
+            email:email,
+            password:password
         }
         if (email === "" || password === ""){
             setError("Please fill in you credentials")
         }else{
-            setError('')
             loginUser(user, context.dispatch)
-            console.log(context)
+            setIsAuth(true)
+        
         }
     }
 
     return (
 
+        
         <KeyboardAwareScrollView
         viewIsInsideTabBar={true}
         extraHeight={200}
         enableOnAndroid={true}
         >
+            
             <Text style={styles.title}>{props.title} LOGIN </Text>
             <Input
             placeholder={'Enter Email'}

@@ -17,15 +17,17 @@ router.post('/login', async(req,res) =>{
     }
 
     if(user && bcrypt.compareSync(req.body.password, user.passwordHash)){
+        console.log(user._id)
         const token = jwt.sign(
             {
-                userId: user.id,
+                userId: user._id,
                 isAdmin: user.isAdmin,
             },
             secret
             
-            //,{expiresIn: '1d'}
+            ,{expiresIn: '1d'}
         )
+        console.log(token)
         return res.status(200).send({user, token:token})
     }
     else{
@@ -79,7 +81,6 @@ router.post('/', async (req,res)=>{
     const saltHash = await bcrypt.genSalt(10);
     const encryptedpassword = await bcrypt.hash(req.body.password, saltHash);
 
-    console.log(encryptedpassword)
 
     let user = new User({
         name:req.body.name,
