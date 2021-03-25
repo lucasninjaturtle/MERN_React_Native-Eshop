@@ -1,12 +1,48 @@
-import React from 'react'
-import {View, Text} from 'react-native'
+import React, { useState, useCallback} from "react"
+import { View, FlatList, Text} from "react-native"
+import axios from "axios"
+import { useFocusEffect } from "@react-navigation/native"
 
-const Orders = (props)=>{
+import OrderCard from "../../Shared/OrderCard"
 
-    return(
+
+const Orders = (props) => {
+
+    const [orderList, setOrderList] = useState();
+
+    useFocusEffect(
+        useCallback(
+            () => {
+                getOrders();
+            return () => {
+                setOrderList();
+            }
+            },
+            [],
+        )
+    )
+
+
+    const getOrders = () => {
+        axios
+        .get(`http://192.168.0.13:3005/api/v1/orders`)
+        .then((x) => {
+            setOrderList(x.data);
+        })
+        .catch((error) => console.log(error))
+    }
+
+    return (
         <View>
-            <Text> Order screen</Text>
+            <FlatList 
+                data={orderList}
+                renderItem={({ item }) => (
+                    <OrderCard navigation={props.navigation} {...item} editMode={true}/>
+                )}
+                keyExtractor={(item) => item.id}
+            />
         </View>
-    )}
+    )
+}
 
-    export default Orders
+export default Orders;
