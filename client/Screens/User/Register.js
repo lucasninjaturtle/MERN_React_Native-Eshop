@@ -28,8 +28,8 @@ const Register = (props) => {
     let user = {
       name: name,
       email: email,
-      password,
-      phone,
+      password:password,
+      phone:phone,
       isAdmin: false,
     };
 

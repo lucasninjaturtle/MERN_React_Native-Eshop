@@ -26,6 +26,7 @@ function authJwt (){
 
 //REJECT the token is not admin
 async function isRevoked (req, payload, done){
+    console.log(payload)
     if(!payload.isAdmin){
         done(null, true)
     }

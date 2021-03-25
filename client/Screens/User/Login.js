@@ -31,8 +31,8 @@ const Login = (props) =>{
 
     const handleSubmit = ()=>{
         const user = {
-            email:email,
-            password:password
+            email,
+        password,
         }
         if (email === "" || password === ""){
             setError("Please fill in you credentials")
@@ -44,8 +44,6 @@ const Login = (props) =>{
     }
 
     return (
-
-        
         <KeyboardAwareScrollView
         viewIsInsideTabBar={true}
         extraHeight={200}
@@ -91,7 +89,7 @@ const Login = (props) =>{
 
 </KeyboardAwareScrollView>
 
-
+                                
     )
 }
 

@@ -34,8 +34,8 @@ const UserProfile = (props) => {
                 axios.get(`http://192.168.0.13:3005/api/v1/users/${context.stateUser.user.userId}`, {
                         headers: { Authorization: `Bearer ${res}` },
                     })
-                    .then(user=>console.log(user.user))
-                    // .then((user) => setUserProfile(user.data))
+                    // .then(user=>console.log(user.user))
+                    .then((user) => setUserProfile(user.data))
                     
                 
             })
@@ -61,6 +61,7 @@ const UserProfile = (props) => {
 
     return (
        <Container style={styles.container}>
+           <Button title='button' onPress={()=>console.log(userProfile)}/>
            <ScrollView contentContainerStyle={styles.subContainer}>
                <Text style={{ fontSize: 30 }}>
                    {userProfile ? userProfile.name : "" }
@@ -76,8 +77,8 @@ const UserProfile = (props) => {
                <View style={{ marginTop: 80 }}>
                     <Button title={"Sign Out"} onPress={() => [
                         AsyncStorage.removeItem("jwt"),
-                        logoutUser(context.dispatch)
-                        
+                        logoutUser(context.dispatch),
+                        props.navigation.navigate("Login")
                     ]}/>
                </View>
                {/* <View style={styles.order}>
