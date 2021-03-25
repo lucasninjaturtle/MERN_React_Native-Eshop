@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, Platform} from 'react-native'
-import {Item, Picker} from 'native-base'
+import {Item, Picker, Button} from 'native-base'
 import { Ionicons } from '@expo/vector-icons'
 import Input from '../../Shared/Form/Input'
 
@@ -8,6 +8,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 
 //REDUX
 import { useSelector, useDispatch } from "react-redux";
+import axios from 'axios'
 
 
 var {width} = Dimensions.get("window");
@@ -32,18 +33,41 @@ const ProductForm = (props)=>{
     const [numReviews, setNumReviews] = useState(0);
     const [item, setItem] = useState(null);
 
+
+// FETCH DATA
+
+useEffect(()=>{
+
+    //categories
+    axios
+                .get(`http://192.168.0.13:3005/api/v1/categories`)
+                .then(res =>{
+                    setCategories(res.data)
+
+                })
+                .catch(err=> [alert('Error to load categories'), console.log(err)])
+
+                return ()=>{
+                    setCategories([])
+                }
+},[])
+
     return(
         
         <KeyboardAwareScrollView
         viewIsInsideTabBar={true}
         extraHeight={200}
         enableOnAndroid={true}
+        style={styles.keybo}
         
         >
-            <View>
-                <Image source={{uri:mainImage}}/>
-                <TouchableOpacity>
-                    <Text>IMAGE</Text>
+            <View >
+               <Text style={{ fontSize:30, alignSelf:'center'}}>Add Product</Text>
+           </View>
+            <View style={styles.imageContainer}>
+                <Image style={styles.image} source={{uri:mainImage}}/>
+                <TouchableOpacity style={styles.imagePicker}>
+                    <Ionicons name='camera'/>
                 </TouchableOpacity>
             </View>
             <View style={styles.label}>
@@ -99,6 +123,9 @@ const ProductForm = (props)=>{
             value={description}
             onChangeText={(text) => setDescription(text)}
            />
+           <View style={styles.label}>
+               <Text style={{ textDecorationLine: "underline"}}>Select the category</Text>
+           </View>
            <Item picker>
                 <Picker
                     mode="dropdown"
@@ -115,26 +142,70 @@ const ProductForm = (props)=>{
                 </Picker>
            </Item>
 
+           {err ? <Error message={err} /> : null}
+           <View style={styles.buttonContainer}>
+               <Button
+                large
+                primary
+                onPress={() => addProduct()}               
+               >
+                   <Text style={styles.buttonText}>Confirm</Text>
+               </Button>
+           </View>
+
             
         </KeyboardAwareScrollView>
 
     )}
 
     const styles = StyleSheet.create({
-    
-        title:{
-            textAlign:'center',
-            marginTop:30,
-            width:width,
-            justifyContent:'center',
-            alignContent:'center',
-            fontSize:30,
-            marginBottom:5
-    
+        label: {
+            width: "80%",
+            marginTop: 10
         },
-        inactive:{
-            backgroundColor:'#a0e1eb'
+        buttonContainer: {
+            width: "80%",
+            marginBottom: 80,
+            marginTop: 20,
+            alignItems: "center",
+            alignSelf:'center'
+        },
+        buttonText: {
+            color: "white"
+        },
+        imageContainer: {
+            width: 200,
+            height: 200,
+            borderStyle: "solid",
+            borderWidth: 8,
+            padding: 3,
+            justifyContent: "center",
+            borderRadius: 100,
+            borderColor: "#E0E0E0",
+            elevation: 10,
+            marginLeft:40,
+            marginTop:5,
+        },
+        image: {
+            width: "100%",
+            height: "100%",
+            borderRadius: 100
+        },
+        imagePicker: {
+            position: "absolute",
+            right: 5,
+            bottom: 5,
+            backgroundColor: "grey",
+            padding: 8,
+            borderRadius: 100,
+            elevation: 20
+        },
+        keybo:{
+            alignSelf:'center',
+            width:'85%',
+            margin:5
         }
     })
+    
 
     export default ProductForm
