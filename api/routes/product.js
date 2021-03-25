@@ -101,7 +101,7 @@ if(!file){
         brand:req.body.brand,
         price:req.body.price,
         category:req.body.category,
-        CountInStock:req.body.CountInStock,
+        countInStock:req.body.countInStock,
         rating: req.body.raiting,
         numReviews:req.body.numReviews,
         isFeatured: req.body.isFeatured,
@@ -151,7 +151,7 @@ if(!category){
         brand:req.body.brand,
         price:req.body.price,
         category:req.body.category,
-        CountInStock:req.body.CountInStock,
+        countInStock:req.body.countInStock,
         rating: req.body.raiting,
         numReviews:req.body.numReviews,
         isFeatured: req.body.isFeatured

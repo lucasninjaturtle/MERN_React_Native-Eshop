@@ -40,7 +40,9 @@ const ListItem = (props) =>{
                             <Ionicons name='close' size={20}/>
                         </TouchableHighlight>
 
-                        <Button title='edit'>
+                        <Button title='edit'
+                        onPress={()=>[props.navigation.navigate("Product Form", {item:props}), setModalVisible(false)]}
+                        >
                             <Text>Edit</Text>
                         </Button>
                         <Button title='delete'

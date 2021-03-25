@@ -5,10 +5,19 @@ import { Ionicons } from '@expo/vector-icons'
 import Input from '../../Shared/Form/Input'
 
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
+import Toast from "react-native-toast-message"
+import AsyncStorage from "@react-native-community/async-storage"
+import axios from "axios"
 
 //REDUX
 import { useSelector, useDispatch } from "react-redux";
-import axios from 'axios'
+
+
+//npm install expo-image-picker
+import * as ImagePicker from "expo-image-picker"
+
+// npm install mime
+import mime from "mime";
 
 
 var {width} = Dimensions.get("window");
@@ -38,6 +47,29 @@ const ProductForm = (props)=>{
 
 useEffect(()=>{
 
+    //FILLING DATA ON MOIFY product
+    if(!props.route.params) {
+        setItem(null);
+    } else {
+        setItem(props.route.params.item);
+        setBrand(props.route.params.item.brand);
+        setName(props.route.params.item.name);
+        setPrice(props.route.params.item.price.toString());
+        setDescription(props.route.params.item.description);
+        setMainImage(props.route.params.item.image);
+        setImage(props.route.params.item.image);
+        setCategory(props.route.params.item.category._id);
+        setCountInStock(props.route.params.item.countInStock.toString());
+    }
+
+    //GETTING TOKEN
+
+    AsyncStorage.getItem("jwt")
+    .then((res) => {
+        setToken(res)
+    })
+    .catch((error) => console.log(error))
+
     //categories
     axios
                 .get(`http://192.168.0.13:3005/api/v1/categories`)
@@ -45,12 +77,134 @@ useEffect(()=>{
                     setCategories(res.data)
 
                 })
-                .catch(err=> [alert('Error to load categories'), console.log(err)])
+                .catch(err=> [alert('Error to load categories'), console.log(err)]);
+
+
+    // Image Picker DATA
+
+    (async () =>{
+        if(Platform.Os !== 'web'){
+            const{
+                status,
+            } = await ImagePicker.requestCameraPermissionsAsync()
+            if (status !== 'granted'){
+                alert('Sorry! we need camera permissions in order this to work :)')
+            }
+        }
+    })();
 
                 return ()=>{
                     setCategories([])
                 }
 },[])
+
+// ONPRESS picking image
+const pickImage = async () =>{
+    let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        //size
+        aspect:[4, 3],
+        quality:1
+    })
+    if(!result.cancelled){
+        setMainImage(result.uri)
+        setImage(result.uri)
+    }
+}
+
+//VALIDATION ADD PRODUCT
+
+const addProduct = () => {
+    if (
+        name == "" ||
+        brand == "" ||
+        price == "" ||
+        description == "" ||
+        category == "" ||
+        countInStock == ""
+    ) {
+        setError("Please fill in the form correctly")
+    }
+    
+        let formData = new FormData();
+
+        const newImageUri = "file:///" + image.split("file:/").join("");
+
+        formData.append("image", {
+            uri: newImageUri,
+            type: mime.getType(newImageUri),
+            name: newImageUri.split("/").pop()
+        });
+        formData.append("name", name);
+        formData.append("brand", brand);
+        formData.append("price", price);
+        formData.append("description", description);
+        formData.append("category", category);
+        formData.append("countInStock", countInStock);
+        formData.append("richDescription", richDescription);
+        formData.append("rating", rating);
+        formData.append("numReviews", numReviews);
+        formData.append("isFeatured", isFeatured);
+
+        const config = {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+        if(item !== null) {
+            axios
+            .put(`http://192.168.0.13:3005/api/v1/products/${item.id}`, formData, config)
+            .then((res) => {
+                if(res.status == 200 || res.status == 201) {
+                    Toast.show({
+                        topOffset: 60,
+                        type: "success",
+                        text1: "Product successfuly updated",
+                        text2: ""
+                    });
+                    setTimeout(() => {
+                        props.navigation.navigate("Products");
+                    }, 500)
+                }
+            })
+            .catch((error) => {
+                Toast.show({
+                    topOffset: 60,
+                        type: "error",
+                        text1: "Something went wrong",
+                        text2: `Please try again ${error}`
+                })
+            })
+        } else {
+            axios
+            .post(`http://192.168.0.13:3005/api/v1/products/`, formData, config)
+            .then((res) => {
+                if(res.status == 200 || res.status == 201) {
+                    Toast.show({
+                        topOffset: 60,
+                        type: "success",
+                        text1: "New Product added",
+                        text2: ""
+                    });
+                    setTimeout(() => {
+                        props.navigation.navigate("Products");
+                    }, 500)
+                }
+            })
+            .catch((error) => {
+                Toast.show({
+                    topOffset: 60,
+                        type: "error",
+                        text1: "Something went wrong",
+                        text2: "Please try again"
+                })
+            })
+        } 
+
+}
 
     return(
         
@@ -66,7 +220,8 @@ useEffect(()=>{
            </View>
             <View style={styles.imageContainer}>
                 <Image style={styles.image} source={{uri:mainImage}}/>
-                <TouchableOpacity style={styles.imagePicker}>
+                
+                <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
                     <Ionicons name='camera'/>
                 </TouchableOpacity>
             </View>
