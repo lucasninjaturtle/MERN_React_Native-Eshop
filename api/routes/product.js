@@ -132,6 +132,7 @@ if(!file){
 //PUT METHODS
 
 router.put('/:id', async (req,res)=>{
+    console.log(req.params.id)
     if(!mongoose.isValidObjectId(req.params.id)){
         return res.status(400).send('Invalid product ID')
     }
@@ -144,7 +145,7 @@ if(!category){
     let product = await Product.findByIdAndUpdate(
         req.params.id,
         {
-            name: req.body.name,
+        name: req.body.name,
         description:req.body.description,
         richDescription:req.body.richDescription,
         image:req.body.image,
@@ -156,7 +157,8 @@ if(!category){
         numReviews:req.body.numReviews,
         isFeatured: req.body.isFeatured
         },
-        {new:true}
+        {new:true},
+        console.log(product)
     )
     if(!product){
         return res.status(404).send('The product cannot be modified')}

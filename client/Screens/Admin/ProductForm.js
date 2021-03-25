@@ -153,9 +153,10 @@ const addProduct = () => {
                 Authorization: `Bearer ${token}`
             }
         }
-
+        console.log(item)
         if(item !== null) {
             axios
+            //ITS NOT WORKING.... THE PUT (see backend)
             .put(`http://192.168.0.13:3005/api/v1/products/${item.id}`, formData, config)
             .then((res) => {
                 if(res.status == 200 || res.status == 201) {
@@ -165,9 +166,9 @@ const addProduct = () => {
                         text1: "Product successfuly updated",
                         text2: ""
                     });
-                    setTimeout(() => {
-                        props.navigation.navigate("Products");
-                    }, 500)
+                    // setTimeout(() => {
+                    //     props.navigation.navigate("Products");
+                    // }, 500)
                 }
             })
             .catch((error) => {
