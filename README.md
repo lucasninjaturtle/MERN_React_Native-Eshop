@@ -1,4 +1,4 @@
-# (MERN)React Native - Eshop
+# (MERN)React Native - Eshop 📱
 
 ## The main features:
 
