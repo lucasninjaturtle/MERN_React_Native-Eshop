@@ -117,7 +117,9 @@ onPress={()=>props.navigation.navigate('Checkout')}>
               ) : 
               
               <Button title='Login' 
-onPress={()=>props.navigation.navigate("Login")}>
+                onPress={()=>props.navigation.navigate("Login")}
+                style={{marginRight:6}}
+                >
   <Text>Log In First</Text>
 </Button>
               }

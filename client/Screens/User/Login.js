@@ -48,9 +48,11 @@ const Login = (props) =>{
         viewIsInsideTabBar={true}
         extraHeight={200}
         enableOnAndroid={true}
+        
         >
-            
+            <View style={{alignItems:'center'}}>
             <Text style={styles.title}>{props.title} LOGIN </Text>
+            
             <Input
             placeholder={'Enter Email'}
             name={"email"}
@@ -78,15 +80,18 @@ const Login = (props) =>{
 
                 <View style={{width:'80%', alignItems:'center', textAlign:'center'}}>
 
-                    <Text style={{marginBottom:20, alignSelf:'center'}}>
+                    <Text style={{margin:20, alignSelf:'center'}}>
                         Don't have an account yet? Register Now!
                     </Text>
                         <Button
                         title="Register"
+                        large
+                        success
+                        block
                         onPress={()=> props.navigation.navigate('Register')}
                         />
                 </View>
-
+                </View>
 </KeyboardAwareScrollView>
 
                                 
@@ -97,12 +102,12 @@ const styles = StyleSheet.create({
     
     title:{
         textAlign:'center',
-        marginTop:30,
+        marginTop:60,
         width:width,
         justifyContent:'center',
         alignContent:'center',
         fontSize:30,
-        marginBottom:5
+        marginBottom:30
 
     },
     inactive:{

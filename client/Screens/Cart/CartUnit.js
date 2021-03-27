@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center'
   },
   body: {
-      // margin: 3,
+      marginBottom: -1.5,
       alignItems: 'center',
       flexDirection: 'row'
   }
