@@ -101,15 +101,15 @@ const Products = (props)=>{
         <View style={styles.container}>
             <View style={styles.buttonContainer}>
                 <Button
-                secondary
+                primary
                 medium
-                style={{margin:3}}
+                style={{margin:3, backgroundColor:'#a8dadc'}}
                 onPress={()=>props.navigation.navigate('Orders')}
                 >
                     <Ionicons
                     name="cart"
                     size={18}
-                    color='white'
+                    color='black'
                     />
                     <Text style={styles.buttonText}>Orders</Text>
                 </Button>
@@ -117,13 +117,13 @@ const Products = (props)=>{
                 <Button
                 secondary
                 medium
-                style={{margin:3}}
+                style={{margin:3, backgroundColor:'#a8dadc'}}
                 onPress={()=>props.navigation.navigate('Product Form')}
                 >
                     <Ionicons
                     name="add"
                     size={18}
-                    color='white'
+                    color='black'
                     />
                     <Text style={styles.buttonText}>Products</Text>
                 </Button>
@@ -131,13 +131,13 @@ const Products = (props)=>{
                 <Button
                 secondary
                 medium
-                style={{margin:3}}
+                style={{margin:3, backgroundColor:'#a8dadc'}}
                 onPress={()=>props.navigation.navigate('Categories')}
                 >
                     <Ionicons
                     name="add"
                     size={18}
-                    color='white'
+                    color='black'
                     />
                     <Text style={styles.buttonText}>Categories</Text>
                 </Button>
@@ -145,9 +145,9 @@ const Products = (props)=>{
             </View>
 
             {/* BUTTON CONTAINER FINISH */}
-            <View>
-                <Header searchBar rounded>
-                    <Item style={{ padding:5 }}>
+            <View style={{marginTop:-15}} >
+                <Header transparent={true} searchBar rounded >
+                    <Item style={{ marginLeft:5, marginTop:-5 }}>
                         <Icon name="search"/>
                         <Input
                             placeholder='search by product'
@@ -199,18 +199,21 @@ const Products = (props)=>{
             margin:3,
         },
         container:{
-            marginBottom:160,
+            marginBottom:20,
             backgroundColor:'white',
+            marginTop:60
         
         },
         buttonContainer:{
-            margin: 10,
+            margin:5,
+            marginBottom:-1,
             alignSelf:'center',
             flexDirection:'row',
         },
         buttonText:{
             marginLeft: 4,
-            color:'white',
+            color:'#003049',
+            fontWeight:'bold',
             padding:10
         }
     })

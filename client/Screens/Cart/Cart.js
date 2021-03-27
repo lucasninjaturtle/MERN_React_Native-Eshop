@@ -69,12 +69,10 @@ const Cart = (props) => {
           
           <SwipeListView
             data={cartItems}
-            renderItem=
-            {(data)=>(
-            <CartUnit style={{backgroundColor:'blue'}}item={data}/> 
+            renderItem={(data)=>(
+            <CartUnit item={data}/> 
             )}
-            renderHiddenItem=
-            {(data)=>( 
+            renderHiddenItem={(data)=>( 
               <View style={styles.hiddenContainer}>
                 <TouchableOpacity style={styles.hiddenButton}
                 onPress={()=>remFromCart(data.item)}

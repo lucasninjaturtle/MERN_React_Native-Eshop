@@ -18,6 +18,7 @@ import * as ImagePicker from "expo-image-picker"
 
 // npm install mime
 import mime from "mime";
+import { ScrollView } from 'react-native-gesture-handler'
 
 
 var {width} = Dimensions.get("window");
@@ -226,9 +227,8 @@ const addProduct = () => {
                     <Ionicons name='camera'/>
                 </TouchableOpacity>
             </View>
-            <View style={styles.label}>
-               <Text style={{ textDecorationLine: "underline"}}>Brand</Text>
-           </View>
+            <View style={{alignItems:'center', marginTop:20}}>
+            
                 <Input
                 placeholder={'Brand'}
                 name={'brand'}
@@ -237,9 +237,7 @@ const addProduct = () => {
                 onChangeText={(text) => setBrand(text)}
                 />
                 
-                <View style={styles.label}>
-               <Text style={{ textDecorationLine: "underline"}}>Name</Text>
-           </View>
+               
            <Input 
             placeholder="Name"
             name="name"
@@ -247,9 +245,7 @@ const addProduct = () => {
             value={name}
             onChangeText={(text) => setName(text)}
            />
-            <View style={styles.label}>
-               <Text style={{ textDecorationLine: "underline"}}>Price</Text>
-           </View>
+            
            <Input 
             placeholder="Price"
             name="price"
@@ -258,9 +254,7 @@ const addProduct = () => {
             keyboardType={"numeric"}
             onChangeText={(text) => setPrice(text)}
            />
-            <View style={styles.label}>
-               <Text style={{ textDecorationLine: "underline"}}>Count in Stock</Text>
-           </View>
+            
            <Input 
             placeholder="Stock"
             name="stock"
@@ -269,9 +263,7 @@ const addProduct = () => {
             keyboardType={"numeric"}
             onChangeText={(text) => setCountInStock(text)}
            />
-            <View style={styles.label}>
-               <Text style={{ textDecorationLine: "underline"}}>Description</Text>
-           </View>
+            
            <Input 
             placeholder="Description"
             name="description"
@@ -297,17 +289,20 @@ const addProduct = () => {
                     })}
                 </Picker>
            </Item>
-
            {err ? <Error message={err} /> : null}
            <View style={styles.buttonContainer}>
                <Button
                 large
-                primary
+                success
+                block
                 onPress={() => addProduct()}               
                >
                    <Text style={styles.buttonText}>Confirm</Text>
                </Button>
            </View>
+           </View>
+
+           
 
             
         </KeyboardAwareScrollView>
@@ -320,11 +315,11 @@ const addProduct = () => {
             marginTop: 10
         },
         buttonContainer: {
-            width: "80%",
+            width:width,
             marginBottom: 80,
             marginTop: 20,
-            alignItems: "center",
-            alignSelf:'center'
+            justifyContent:'center'
+           
         },
         buttonText: {
             color: "white"
@@ -335,11 +330,12 @@ const addProduct = () => {
             borderStyle: "solid",
             borderWidth: 8,
             padding: 3,
-            justifyContent: "center",
+            // alignItems:'center',
+            // justifyContent: "center",
             borderRadius: 100,
             borderColor: "#E0E0E0",
             elevation: 10,
-            marginLeft:40,
+            marginLeft:80,
             marginTop:5,
         },
         image: {
@@ -358,8 +354,8 @@ const addProduct = () => {
         },
         keybo:{
             alignSelf:'center',
-            width:'85%',
-            margin:5
+            width:'88%',
+            marginTop:60,
         }
     })
     

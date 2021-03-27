@@ -76,9 +76,9 @@ const Confirm = (props) =>{
             <View style={styles.titleContainer}>
                 <Text style={{fontSize:20, fontWeight:'bold'}}> Confirm Order</Text>
                 {props.route.params ? 
-                <View style={{borderWidth:1, borderColor: 'blue'}}> 
+                <View style={{borderWidth:3, borderColor: 'blue'}}> 
                     <Text style={styles.title}> Shipping to: </Text>
-                    <View>
+                    <View style={{padding:20}}>
                         <Text>Address: {confirm.order.order.shippingAddress1}</Text>
                         <Text>Address 2: {confirm.order.order.shippingAddress2}</Text>
                         <Text>City {confirm.order.order.city}</Text>
@@ -103,11 +103,7 @@ const Confirm = (props) =>{
                                     <Right>
                                         <Text>$ {x.price}</Text>
                                     </Right>
-                                    <Right>
-                                        <Button onPress={()=>console.log(finalOrder)}>
-                                            <Text>CONSOLE LOG</Text>
-                                        </Button>
-                                    </Right>
+                                    
 
                                 </Body>
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet} from 'react-native'
+import {StyleSheet, View} from 'react-native'
 import {
     Text,
     Left,
@@ -16,10 +16,9 @@ const CartUnit = (props) =>{
     const data = props.item.item
     // console.log(data)
 
-
-
     return (
-      <Container>
+      // <Container>
+      <View style={{backgroundColor:'white'}}>
         <ListItem 
               thumbnail
               style={styles.ListItem}
@@ -41,18 +40,18 @@ const CartUnit = (props) =>{
                   </Text>
                 </Right>
               </ListItem>
-              </Container>
+              </View>
+              // </Container>
     )
 }
 
 const styles = StyleSheet.create({
   listItem: {
       alignItems: 'center',
-      backgroundColor: 'blue',
       justifyContent: 'center'
   },
   body: {
-      margin: 3,
+      // margin: 3,
       alignItems: 'center',
       flexDirection: 'row'
   }
