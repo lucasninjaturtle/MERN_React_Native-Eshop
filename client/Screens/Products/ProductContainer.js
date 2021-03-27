@@ -108,7 +108,7 @@ const ProductContainer = (props) => {
     {loading === false ? (
 
 <Container style={styles.container}>
-      <Header transparent={true} searchBar rounded>
+      <Header transparent={true} searchBar rounded style={{marginTop:20}}>
         <Item>
           <Icon name="ios-search" />
           <Input

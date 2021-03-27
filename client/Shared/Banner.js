@@ -28,8 +28,8 @@ const Banner = ()=>{
                 style={{height:width/2}}
                 index={0}
                 showButtons={true}
-                autoPlay={true}
-                autoplayTimeout={1}               
+                autoplay={true}
+                autoplayTimeout={3}               
                 
                 >
                     {bannerData.map(item =>{
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
         width:width,
         alignItems:'center',
         marginTop:10,
+        marginBottom:10
     },
     imageBanner:{
         width: width-40,

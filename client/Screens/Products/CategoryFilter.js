@@ -12,10 +12,10 @@ return (
     <ScrollView
     bouces={true}
     horizontal={true}
-    style={{backgroundColor: 'grey'}}
+    style={{backgroundColor: '#a8dadc'}}
     
     >
-        <ListItem style={{margin: 0, padding: 0, borderRadius: 0}}>
+        <ListItem style={{margin: 0, padding: 10, borderRadius: 0}}>
             <TouchableOpacity
             onPress={()=>{
                 props.CategoryFilter('all'), props.setActive(-1)
@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
     center:{
         justifyContent:'center',
         alignItems:'center',
-        
     },
     active:{
         backgroundColor: 'grey',

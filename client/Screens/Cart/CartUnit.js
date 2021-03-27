@@ -6,7 +6,8 @@ import {
     Right,
     ListItem,
     Thumbnail,
-    Body
+    Body,
+    Container
 } from 'native-base'
 
 
@@ -18,6 +19,7 @@ const CartUnit = (props) =>{
 
 
     return (
+      <Container>
         <ListItem 
               thumbnail
               style={styles.ListItem}
@@ -39,7 +41,7 @@ const CartUnit = (props) =>{
                   </Text>
                 </Right>
               </ListItem>
-       
+              </Container>
     )
 }
 

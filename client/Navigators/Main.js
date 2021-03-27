@@ -31,13 +31,13 @@ const Main = () =>{
         initialRouteName='Home'
         tabBarOptions={{
             // keyboardHidesTabBar=true,
-            // showLabel=false,
-            activeTintColor: '#e63946',
-          inactiveTintColor: 'black',
-          style: {
+            
+            activeTintColor: '#003049',
+        inactiveTintColor: 'black',
+        style: {
             backgroundColor: '#a8dadc',
-        
-          },
+        },
+        //   showLabel=false,
         }}
         
         >
@@ -50,7 +50,7 @@ const Main = () =>{
                     name='home'
                     style={{position:'relative'}}
                     color={color}
-                    size={40}
+                    size={30}
                     />
                 )
             }}
@@ -64,7 +64,7 @@ const Main = () =>{
                     <Ionicons
                     name='cart'
                     color={color}
-                    size={40}
+                    size={30}
                     />
                     <CartIcon/>
                     </View>
@@ -81,7 +81,7 @@ const Main = () =>{
                     <Ionicons
                     name='cog'
                     color={color}
-                    size={40}
+                    size={30}
                     />
                 )
             }}
@@ -98,7 +98,7 @@ const Main = () =>{
                     <Ionicons
                     name='person-outline'
                     color={color}
-                    size={40}
+                    size={30}
                     />
                 )
             }}
