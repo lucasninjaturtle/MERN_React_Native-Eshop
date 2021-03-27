@@ -110,7 +110,9 @@ const Cart = (props) => {
               {context.stateUser.isAuthenticated ? (
 
 <Button title='Checkout' 
+style={{marginRight:6}}
 onPress={()=>props.navigation.navigate('Checkout')}>
+  
   <Text>CheckOut</Text>
 </Button>
 

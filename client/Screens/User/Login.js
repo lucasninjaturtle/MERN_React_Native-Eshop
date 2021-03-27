@@ -25,7 +25,7 @@ const Login = (props) =>{
     useEffect(()=>{
         
         if(context.stateUser.isAuthenticated === true ){
-            props.navigation.navigate('User profile')
+            props.navigation.navigate('Cart')
         }
     },[context.stateUser.isAuthenticated])
 

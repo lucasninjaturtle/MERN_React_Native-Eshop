@@ -103,7 +103,7 @@ const Products = (props)=>{
                 <Button
                 primary
                 medium
-                style={{margin:3, backgroundColor:'#a8dadc'}}
+                style={{margin:10, backgroundColor:'#a8dadc'}}
                 onPress={()=>props.navigation.navigate('Orders')}
                 >
                     <Ionicons
@@ -117,7 +117,7 @@ const Products = (props)=>{
                 <Button
                 secondary
                 medium
-                style={{margin:3, backgroundColor:'#a8dadc'}}
+                style={{margin:10, backgroundColor:'#a8dadc'}}
                 onPress={()=>props.navigation.navigate('Product Form')}
                 >
                     <Ionicons
@@ -131,7 +131,7 @@ const Products = (props)=>{
                 <Button
                 secondary
                 medium
-                style={{margin:3, backgroundColor:'#a8dadc'}}
+                style={{margin:10, backgroundColor:'#a8dadc'}}
                 onPress={()=>props.navigation.navigate('Categories')}
                 >
                     <Ionicons
