@@ -6,6 +6,7 @@ import Cart from '../Screens/Cart/Cart'
 //Checkooutnavigator to go to Payment, Confirm and shipping.
 import Checkooutnavigator from './CheckoutNavigator'
 import CheckoutNavigator from './CheckoutNavigator'
+import Login from '../Screens/User/Login'
 
 
 const Stack = createStackNavigator()
@@ -27,6 +28,13 @@ const MyStack = ()=>{
             component={CheckoutNavigator}
             options={{
                 title: 'Checkout',
+            }}
+            />
+            <Stack.Screen
+            name='Login'
+            component={Login}
+            options={{
+                title: 'Login',
             }}
             />
         </Stack.Navigator>
