@@ -65,7 +65,7 @@ const Cart = (props) => {
       {cartItems.length ? (
         
         <Container>
-          <H1 style={{ alignSelf: "center", marginTop:40 }}>Cart</H1>
+          <H1 style={{ alignSelf: "center", marginTop:60 }}>Cart</H1>
           
           <SwipeListView
             data={cartItems}
