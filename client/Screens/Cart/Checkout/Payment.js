@@ -18,9 +18,10 @@ import {
 const methods = [
     {name: 'Cash on Delivery', value: 1},
     {name: 'Bank Transfer', value: 2},
+    {name: 'Card Payment',value:3},
     {name: 'Bitcoin Payment',value:4},
     {name: 'MercadoPago',value:5},
-    {name: 'Card Payment',value:3},
+    
 ]
 
 const paymentCards = [
@@ -80,10 +81,14 @@ const Payment = (props) =>{
                         })}
                     </Picker>
                 ) : null}
-                <View style={{marginTop:60, alignSelf:'center'}}>
+                <View style={{marginTop:10, alignSelf:'center'}}>
                         <Button
                         title={'Confirm'}
                         onPress={()=> props.navigation.navigate('Confirm', {order:order})}
+                        />
+                        <Button
+                        title={'console log'}
+                        onPress={()=> console.log(order)}
                         />
 
                 </View>

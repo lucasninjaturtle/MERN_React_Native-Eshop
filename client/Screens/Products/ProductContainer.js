@@ -23,6 +23,7 @@ const ProductContainer = (props) => {
   const [active, setActive] = useState();
   const [initialState, setInitialState] = useState([]);
   const [loading, setLoading] = useState(true)
+  const [quantity, setQuantity] = useState(1)
 
   useFocusEffect((
     useCallback(

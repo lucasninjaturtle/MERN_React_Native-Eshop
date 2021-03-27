@@ -16,10 +16,9 @@ import {addToCart} from '../../Redux/Actions/cartActions'
 var {width} = Dimensions.get("window");
 
 const ProductCard = (props) =>{
-
     
-    //Compopnent PROPS
-    const {name, price, image, url, countInStock } = props;
+    //Component PROPS
+    const {name, price, image, url, countInStock, quantity } = props;
 
     //REDUX
     const cartItems = useSelector(state => state.cartItems)
@@ -28,6 +27,7 @@ const ProductCard = (props) =>{
    // REDUX functions
 
    const addItemToCart = props =>{
+       console.log(props)
        dispatch(addToCart(props));
     
    }
@@ -46,13 +46,13 @@ const ProductCard = (props) =>{
                     + "..." : name}
                 </Text >
                 <Text style={styles.price}> ${price}  </Text>
-
+                        <Text> quantity{quantity}</Text>
                 {countInStock > 0 ? (
                     <View>
                         <Button 
                         title={'Add'} 
                         color={'green'}
-                        onPress={()=>{addItemToCart(props),
+                        onPress={()=>{[console.log(props),addItemToCart(props)],
                         Toast.show({
                             topOffset:60,
                             type:'success',
