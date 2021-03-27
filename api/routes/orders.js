@@ -52,10 +52,10 @@ router.get(`/get/count`,async (req,res) =>{
 // POST METHODS
 router.post('/', async (req,res)=>{
     // Loop for every order Item and save everyone on de DB
-    const orderitemsId = Promise.all(req.body.orderItems.map(async orderitem =>{
+    const orderitemsId = Promise.all(req.body.orderItems.map(async orderItem =>{
         let newOrderItem = new OrderItem({
-            quantity:orderitem.quantity,
-            product: orderitem.product
+            quantity:orderItem.quantity,
+            product: orderItem.product
         })
         newOrderItem = await newOrderItem.save()
 
@@ -64,15 +64,15 @@ router.post('/', async (req,res)=>{
     }))
     const orderItemsIdsPromiseResolved = await orderitemsId
 
-    const totalPrices = await Promise.all(orderItemsIdsPromiseResolved.map(async (orderItemId)=>{
-        const orderItem = await OrderItem.findById(orderItemId).populate("product", "price")
-        const totalPrice = orderItem.product.price * orderItem.quantity
-        return totalPrice;
-    }))
+    // const totalPrices = await Promise.all(orderItemsIdsPromiseResolved.map(async (orderItemId)=>{
+    //     const orderItem = await OrderItem.findById(orderItemId).populate("product", "price")
+    //     const totalPrice = orderItem.product.price * orderItem.quantity
+    //     return totalPrice;
+    // }))
 
   
 
-    const totalPrice = totalPrices.reduce((a,b) => a+b, 0)
+    // const totalPrice = totalPrices.reduce((a,b) => a+b, 0)
 
     let order = new Order({
         orderItems:orderItemsIdsPromiseResolved ,
@@ -83,7 +83,8 @@ router.post('/', async (req,res)=>{
         country:req.body.country,
         phone:req.body.phone,
         status:req.body.status,
-        totalPrice:totalPrice,
+        // totalPrice:totalPrice,
+        totalPrice:req.body.totalPrice,
         user:req.body.user,
     })
     order = await order.save();

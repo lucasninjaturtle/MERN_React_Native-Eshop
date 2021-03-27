@@ -1,19 +1,16 @@
-import React, { Fragment } from "react";
-import { View, Dimensions, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useContext } from "react";
+import { View, Dimensions, TouchableOpacity, StyleSheet, Animated } from "react-native";
 import {
   Container,
   Text,
   Left,
   Right,
   H1,
-  ListItem,
-  Thumbnail,
-  Body,
   Button,
-  SwipeRow,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import CartUnit from './CartUnit.js'
+import AuthGlobal from '../../Context/store/AuthGlobal'
 
 //REDUX
 import { useSelector, useDispatch } from "react-redux";
@@ -21,6 +18,8 @@ import { clearCart, removeFromCart } from "../../Redux/Actions/cartActions";
 
 
 import { SwipeListView } from 'react-native-swipe-list-view';
+
+
 
 //DIMNESIONS
 
@@ -31,7 +30,7 @@ const Cart = (props) => {
 
   let total = 0;
   
-
+  const context = useContext(AuthGlobal)
 //REDUX CARtITEMS
   //REDUX
   const cartItems = useSelector(state => state.cartItems)
@@ -58,6 +57,7 @@ const Cart = (props) => {
     return total+= cart.price
   })
 
+ 
   
   return (
     //   This <>  and </> to close is called react Fragment, this doesnt take a node on HTMLAllCollection, and its used on react to encapsulete and not taking HTML space
@@ -65,21 +65,24 @@ const Cart = (props) => {
       {cartItems.length ? (
         
         <Container>
-          <H1 style={{ alignSelf: "center" }}>Cart</H1>
+          <H1 style={{ alignSelf: "center", marginTop:40 }}>Cart</H1>
           
           <SwipeListView
             data={cartItems}
-            renderItem={(data)=>(
-            <CartUnit item={data}/> 
+            renderItem=
+            {(data)=>(
+            <CartUnit style={{backgroundColor:'blue'}}item={data}/> 
             )}
-            renderHiddenItem={(data)=>(
+            renderHiddenItem=
+            {(data)=>( 
               <View style={styles.hiddenContainer}>
-                <TouchableOpacity style={styles.hiddenButton}> 
+                <TouchableOpacity style={styles.hiddenButton}
+                onPress={()=>remFromCart(data.item)}
+                > 
                   <Ionicons 
                   name='trash-outline'
-                  color={'red'}
+                  color={'white'}
                   size={30}
-                  onPress={()=>remFromCart(data.item)}
                   />
                 </TouchableOpacity>
               </View>
@@ -92,7 +95,6 @@ const Cart = (props) => {
             stopLeftSwipe={75}
             rightOpenValue={-75}
           />
-          
         
           <View style={styles.bottommContainer}>
             <Left>
@@ -107,10 +109,21 @@ const Cart = (props) => {
           </Button>
             </Right>
             <Right>
-              <Button title='Checkout' 
-              onPress={()=>props.navigation.navigate('Checkout')}>
-                <Text>CheckOut</Text>
-          </Button>
+              {context.stateUser.isAuthenticated ? (
+
+<Button title='Checkout' 
+onPress={()=>props.navigation.navigate('Checkout')}>
+  <Text>CheckOut</Text>
+</Button>
+
+              ) : 
+              
+              <Button title='Login' 
+onPress={()=>props.navigation.navigate("Login")}>
+  <Text>Log In First</Text>
+</Button>
+              }
+              
             </Right>
 
 
@@ -152,12 +165,32 @@ hiddenContainer: {
   flexDirection: 'row'
 },
 hiddenButton: {
-  backgroundColor: 'white',
+  backgroundColor: 'red',
   justifyContent: 'center',
   alignItems: 'flex-end',
   paddingRight: 25,
   height: 70,
-  width: width / 1.2
+  width: width / 1.3
+},
+rowBack: {
+  alignItems: 'center',
+  backgroundColor: 'grey',
+  flex: 1,
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  paddingLeft: 15,
+},
+backRightBtn: {
+  alignItems: 'center',
+  bottom: 0,
+  justifyContent: 'center',
+  position: 'absolute',
+  top: 0,
+  width: 75,
+},
+backRightBtnRight: {
+  backgroundColor: 'red',
+  right: 0,
 }
 });
 

@@ -108,11 +108,11 @@ const ProductContainer = (props) => {
     {loading === false ? (
 
 <Container style={styles.container}>
-      <Header searchBar rounded>
+      <Header transparent={true} searchBar rounded>
         <Item>
           <Icon name="ios-search" />
           <Input
-            placeholder="Search"
+            placeholder="Search products by name"
             onFocus={openList}
             onChangeText={(text) => searchProduct(text)}
           />

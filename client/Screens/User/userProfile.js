@@ -17,8 +17,9 @@ const UserProfile = (props) => {
     const [userProfile, setUserProfile] = useState()
     const [orders, setOrders] = useState()
 
-    useEffect(()=>{
-        console.log(context)
+    useFocusEffect(
+        
+        useCallback(()=>{
         
         if (
             context.stateUser.isAuthenticated === false || 
@@ -57,7 +58,7 @@ const UserProfile = (props) => {
             setOrders();
         }
 
-    }, [context.stateUser.isAuthenticated])
+    }, [context.stateUser.isAuthenticated]))
 
     return (
        <Container style={styles.container}>
@@ -81,7 +82,7 @@ const UserProfile = (props) => {
                         props.navigation.navigate("Login")
                     ]}/>
                </View>
-               {/* <View style={styles.order}>
+               <View style={styles.order}>
                    <Text style={{ fontSize: 20 }}>My Orders</Text>
                    <View>
                        {orders ? (
@@ -94,7 +95,7 @@ const UserProfile = (props) => {
                            </View>
                        )}
                    </View>
-               </View> */}
+               </View>
            </ScrollView>
        </Container>
     )

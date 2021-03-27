@@ -9,13 +9,14 @@ import {
     Body,
     Button
 } from 'native-base'
-
+import axios from 'axios'
 
 //REDUX
 import { useSelector, useDispatch } from "react-redux";
 
 import {clearCart} from "../../../Redux/Actions/cartActions";
 
+import Toast from 'react-native-toast-message'
 
 var {height, width} = Dimensions.get("window");
 
@@ -28,15 +29,37 @@ const Confirm = (props) =>{
         
     }
 
-    
+    const finalOrder = props.route.params;
 //CONFIRM ORDER FUNCTION
 
     const ConfirmOrder = ()=>{
 
 
-        setTimeout(()=>{
-            cleanCart()
-            props.navigation.navigate('Cart')
+        const order = finalOrder.order.order;
+
+        axios
+        .post(`http://192.168.0.13:3005/api/v1/orders`, order)
+        .then((res) => {
+            if (res.status == 200 || res.status == 201) {
+                Toast.show({
+                    topOffset: 60,
+                    type: "success",
+                    text1: "Order Completed",
+                    text2: "",
+                })
+                setTimeout(() => {
+                    props.clearCart();
+                    props.navigation.navigate("Cart")
+                }, 500)
+            }
+        })
+        .catch((error) => {
+            Toast.show({
+                topOffset: 60,
+                type: "error",
+                text1: "Something went wrong",
+                text2: "Please try again",
+            })
         })
 
 
@@ -77,6 +100,14 @@ const Confirm = (props) =>{
                                     <Left>
                                         <Text>{x.name}</Text>
                                     </Left>
+                                    <Right>
+                                        <Text>$ {x.price}</Text>
+                                    </Right>
+                                    <Right>
+                                        <Button onPress={()=>console.log(finalOrder)}>
+                                            <Text>CONSOLE LOG</Text>
+                                        </Button>
+                                    </Right>
 
                                 </Body>
 
